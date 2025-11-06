@@ -174,20 +174,20 @@ function isMobileView() {
 
 function updateCarouselPosition(planetKey) {
     if (!isMobileView()) return;
-    
+
     const buttons = Array.from(carouselTrack.querySelectorAll('.nav-planet-btn'));
     const activeIndex = buttons.findIndex(btn => btn.getAttribute('data-planet') === planetKey);
-    
+
     if (activeIndex === -1) return;
-    
+
     const totalButtons = buttons.length;
     const arcRadius = 40;
-    
+
     buttons.forEach((btn, index) => {
         btn.classList.remove('active', 'adjacent');
-        
+
         const relativeIndex = index - activeIndex;
-        
+
         if (relativeIndex === 0) {
             btn.classList.add('active');
             btn.style.left = '50%';
@@ -199,14 +199,14 @@ function updateCarouselPosition(planetKey) {
             if (Math.abs(relativeIndex) === 1) {
                 btn.classList.add('adjacent');
             }
-            
+
             const position = relativeIndex;
             const angle = position * 40;
             const angleRad = (angle) * (Math.PI / 180);
-            
+
             const x = 50 + Math.sin(angleRad) * arcRadius;
             const y = 50 - Math.cos(angleRad) * arcRadius * 0.5;
-            
+
             btn.style.left = x + '%';
             btn.style.top = y + '%';
             btn.style.transform = 'translate(-50%, -50%)';
@@ -224,25 +224,25 @@ function updateCarouselPosition(planetKey) {
 function updatePlanetDisplay(planetKey) {
     const data = planetsData[planetKey];
     if (!data) return;
-    
+
     const planetContainer = document.getElementById('planetContainer');
     const isMobile = isMobileView();
-    
+
     const currentIndex = planetOrder.indexOf(currentPlanet);
     const newIndex = planetOrder.indexOf(planetKey);
-    
+
     if (mainPlanet) {
         if (isMobile && currentPlanet !== planetKey) {
             const direction = newIndex > currentIndex ? 'left' : 'right';
-            
+
             planetContainer.classList.remove('slide-in-left', 'slide-in-right', 'prepare-left', 'prepare-right');
             planetContainer.classList.add(`slide-out-${direction}`);
-            
+
             setTimeout(() => {
                 mainPlanet.style.backgroundImage = `url('${data.image}')`;
                 planetContainer.classList.remove(`slide-out-${direction}`);
                 planetContainer.classList.add(`prepare-${direction === 'left' ? 'left' : 'right'}`);
-                
+
                 setTimeout(() => {
                     planetContainer.classList.remove('prepare-left', 'prepare-right');
                     planetContainer.classList.add(`slide-in-${direction}`);
@@ -251,7 +251,7 @@ function updatePlanetDisplay(planetKey) {
         } else if (!isMobile) {
             mainPlanet.style.opacity = '0';
             mainPlanet.style.transform = 'scale(0.8)';
-            
+
             setTimeout(() => {
                 mainPlanet.style.backgroundImage = `url('${data.image}')`;
                 mainPlanet.style.opacity = '1';
@@ -261,26 +261,31 @@ function updatePlanetDisplay(planetKey) {
             mainPlanet.style.backgroundImage = `url('${data.image}')`;
         }
     }
-    
+
     currentPlanet = planetKey;
-    
+
     if (isMobile) {
         updateCarouselPosition(planetKey);
     }
-    
+
     if (planetTitle) {
         planetTitle.textContent = data.name;
         planetTitle.setAttribute('data-text', data.name);
     }
-    
+
     if (planetTagline) {
         planetTagline.textContent = data.tagline;
     }
     
-    if (panelTitle) {
-        panelTitle.textContent = `${data.name} SPECIFICATIONS`;
+    const orbitalValue = document.getElementById('orbitalValue');
+    if (orbitalValue) {
+        orbitalValue.textContent = data.orbitalPeriod;
     }
-    
+
+    if (panelTitle) {
+        panelTitle.textContent = `${data.name}`;
+    }
+
     const elements = {
         tiltValue: data.tilt,
         gravityValue: data.gravity,
@@ -294,18 +299,18 @@ function updatePlanetDisplay(planetKey) {
         overview: data.overview,
         funFact: data.funFact
     };
-    
+
     Object.entries(elements).forEach(([id, value]) => {
         const element = document.getElementById(id);
         if (element) {
             element.textContent = value;
         }
     });
-    
+
     if (planetGlow) {
         planetGlow.style.background = `radial-gradient(circle, ${data.glowColor} 0%, transparent 70%)`;
     }
-    
+
     document.querySelectorAll('.nav-planet-btn').forEach(btn => {
         if (btn.getAttribute('data-planet') === planetKey) {
             btn.classList.add('active');
@@ -313,7 +318,7 @@ function updatePlanetDisplay(planetKey) {
             btn.classList.remove('active');
         }
     });
-    
+
     if (mainPlanet) {
         mainPlanet.style.animation = 'none';
         setTimeout(() => {
@@ -324,28 +329,28 @@ function updatePlanetDisplay(planetKey) {
 
 function positionNavButtons() {
     const isMobile = isMobileView();
-    
+
     if (isMobile) {
         updateCarouselPosition(currentPlanet);
         return;
     }
-    
+
     const navContainer = document.getElementById('planetNavigation');
     const buttons = navContainer.querySelectorAll('.nav-planet-btn');
-    
+
     const containerRect = navContainer.getBoundingClientRect();
     const centerX = containerRect.width / 2;
     const centerY = containerRect.height / 2;
     const radius = Math.min(containerRect.width, containerRect.height) / 2;
-    
+
     buttons.forEach((button) => {
         const angle = parseFloat(button.getAttribute('data-angle'));
         const offset = parseFloat(button.getAttribute('data-offset')) || 0;
         const angleRad = (angle - 90) * (Math.PI / 180);
-        
+
         const x = centerX + (radius + offset) * Math.cos(angleRad);
         const y = centerY + (radius + offset) * Math.sin(angleRad);
-        
+
         button.style.left = x + 'px';
         button.style.top = y + 'px';
     });
