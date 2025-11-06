@@ -164,15 +164,70 @@ const planetGlow = document.querySelector('.planet-glow');
 const dataPanelTrigger = document.getElementById('dataPanelTrigger');
 const dataPanel = document.getElementById('dataPanel');
 const closePanel = document.getElementById('closePanel');
+const carouselTrack = document.getElementById('carouselTrack');
+
+const planetOrder = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'sun'];
+
+function isMobileView() {
+    return window.innerWidth <= 768;
+}
+
+function updateCarouselPosition(planetKey) {
+    if (!isMobileView()) return;
+    
+    const buttons = Array.from(carouselTrack.querySelectorAll('.nav-planet-btn'));
+    const activeIndex = buttons.findIndex(btn => btn.getAttribute('data-planet') === planetKey);
+    
+    if (activeIndex === -1) return;
+    
+    const totalButtons = buttons.length;
+    const arcRadius = 40;
+    
+    buttons.forEach((btn, index) => {
+        btn.classList.remove('active', 'adjacent');
+        
+        const relativeIndex = index - activeIndex;
+        
+        if (relativeIndex === 0) {
+            btn.classList.add('active');
+            btn.style.left = '50%';
+            btn.style.top = '50%';
+            btn.style.transform = 'translate(-50%, -50%)';
+            btn.style.opacity = '1';
+            btn.style.pointerEvents = 'all';
+        } else if (Math.abs(relativeIndex) <= 2) {
+            if (Math.abs(relativeIndex) === 1) {
+                btn.classList.add('adjacent');
+            }
+            
+            const position = relativeIndex;
+            const angle = position * 40;
+            const angleRad = (angle) * (Math.PI / 180);
+            
+            const x = 50 + Math.sin(angleRad) * arcRadius;
+            const y = 50 - Math.cos(angleRad) * arcRadius * 0.5;
+            
+            btn.style.left = x + '%';
+            btn.style.top = y + '%';
+            btn.style.transform = 'translate(-50%, -50%)';
+            btn.style.opacity = Math.abs(relativeIndex) === 1 ? '0.6' : '0.35';
+            btn.style.pointerEvents = 'all';
+        } else {
+            btn.style.opacity = '0';
+            btn.style.pointerEvents = 'none';
+            btn.style.left = '50%';
+            btn.style.top = '-100%';
+        }
+    });
+}
 
 function updatePlanetDisplay(planetKey) {
     const data = planetsData[planetKey];
     if (!data) return;
     
     const planetContainer = document.getElementById('planetContainer');
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = isMobileView();
     
-    const planetOrder = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'sun'];
     const currentIndex = planetOrder.indexOf(currentPlanet);
     const newIndex = planetOrder.indexOf(planetKey);
     
@@ -208,6 +263,10 @@ function updatePlanetDisplay(planetKey) {
     }
     
     currentPlanet = planetKey;
+    
+    if (isMobile) {
+        updateCarouselPosition(planetKey);
+    }
     
     if (planetTitle) {
         planetTitle.textContent = data.name;
@@ -264,6 +323,13 @@ function updatePlanetDisplay(planetKey) {
 }
 
 function positionNavButtons() {
+    const isMobile = isMobileView();
+    
+    if (isMobile) {
+        updateCarouselPosition(currentPlanet);
+        return;
+    }
+    
     const navContainer = document.getElementById('planetNavigation');
     const buttons = navContainer.querySelectorAll('.nav-planet-btn');
     
@@ -271,43 +337,17 @@ function positionNavButtons() {
     const centerX = containerRect.width / 2;
     const centerY = containerRect.height / 2;
     const radius = Math.min(containerRect.width, containerRect.height) / 2;
-    const isMobile = window.innerWidth <= 768;
     
-    buttons.forEach((button, index) => {
-        if (isMobile) {
-            const isSunButton = button.classList.contains('sun-btn');
-            
-            if (isSunButton) {
-                button.style.left = centerX + 'px';
-                button.style.top = (centerY - radius * 0.3) + 'px';
-            } else {
-                const arcButtons = Array.from(buttons).filter(btn => !btn.classList.contains('sun-btn'));
-                const buttonIndex = arcButtons.indexOf(button);
-                const totalButtons = arcButtons.length;
-                const arcStart = -160;
-                const arcEnd = -20;
-                const arcSpan = arcEnd - arcStart;
-                const angleStep = arcSpan / (totalButtons - 1);
-                const angle = arcStart + (buttonIndex * angleStep);
-                const angleRad = angle * (Math.PI / 180);
-                
-                const x = centerX + radius * Math.cos(angleRad);
-                const y = centerY + radius * Math.sin(angleRad);
-                
-                button.style.left = x + 'px';
-                button.style.top = y + 'px';
-            }
-        } else {
-            const angle = parseFloat(button.getAttribute('data-angle'));
-            const offset = parseFloat(button.getAttribute('data-offset')) || 0;
-            const angleRad = (angle - 90) * (Math.PI / 180);
-            
-            const x = centerX + (radius + offset) * Math.cos(angleRad);
-            const y = centerY + (radius + offset) * Math.sin(angleRad);
-            
-            button.style.left = x + 'px';
-            button.style.top = y + 'px';
-        }
+    buttons.forEach((button) => {
+        const angle = parseFloat(button.getAttribute('data-angle'));
+        const offset = parseFloat(button.getAttribute('data-offset')) || 0;
+        const angleRad = (angle - 90) * (Math.PI / 180);
+        
+        const x = centerX + (radius + offset) * Math.cos(angleRad);
+        const y = centerY + (radius + offset) * Math.sin(angleRad);
+        
+        button.style.left = x + 'px';
+        button.style.top = y + 'px';
     });
 }
 
