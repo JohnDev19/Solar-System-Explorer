@@ -169,11 +169,45 @@ function updatePlanetDisplay(planetKey) {
     const data = planetsData[planetKey];
     if (!data) return;
     
-    currentPlanet = planetKey;
+    const planetContainer = document.getElementById('planetContainer');
+    const isMobile = window.innerWidth <= 768;
+    
+    const planetOrder = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'sun'];
+    const currentIndex = planetOrder.indexOf(currentPlanet);
+    const newIndex = planetOrder.indexOf(planetKey);
     
     if (mainPlanet) {
-        mainPlanet.style.backgroundImage = `url('${data.image}')`;
+        if (isMobile && currentPlanet !== planetKey) {
+            const direction = newIndex > currentIndex ? 'left' : 'right';
+            
+            planetContainer.classList.remove('slide-in-left', 'slide-in-right', 'prepare-left', 'prepare-right');
+            planetContainer.classList.add(`slide-out-${direction}`);
+            
+            setTimeout(() => {
+                mainPlanet.style.backgroundImage = `url('${data.image}')`;
+                planetContainer.classList.remove(`slide-out-${direction}`);
+                planetContainer.classList.add(`prepare-${direction === 'left' ? 'left' : 'right'}`);
+                
+                setTimeout(() => {
+                    planetContainer.classList.remove('prepare-left', 'prepare-right');
+                    planetContainer.classList.add(`slide-in-${direction}`);
+                }, 50);
+            }, 600);
+        } else if (!isMobile) {
+            mainPlanet.style.opacity = '0';
+            mainPlanet.style.transform = 'scale(0.8)';
+            
+            setTimeout(() => {
+                mainPlanet.style.backgroundImage = `url('${data.image}')`;
+                mainPlanet.style.opacity = '1';
+                mainPlanet.style.transform = 'scale(1)';
+            }, 300);
+        } else {
+            mainPlanet.style.backgroundImage = `url('${data.image}')`;
+        }
     }
+    
+    currentPlanet = planetKey;
     
     if (planetTitle) {
         planetTitle.textContent = data.name;
@@ -237,17 +271,43 @@ function positionNavButtons() {
     const centerX = containerRect.width / 2;
     const centerY = containerRect.height / 2;
     const radius = Math.min(containerRect.width, containerRect.height) / 2;
+    const isMobile = window.innerWidth <= 768;
     
-    buttons.forEach(button => {
-        const angle = parseFloat(button.getAttribute('data-angle'));
-        const offset = parseFloat(button.getAttribute('data-offset')) || 0;
-        const angleRad = (angle - 90) * (Math.PI / 180);
-        
-        const x = centerX + (radius + offset) * Math.cos(angleRad);
-        const y = centerY + (radius + offset) * Math.sin(angleRad);
-        
-        button.style.left = x + 'px';
-        button.style.top = y + 'px';
+    buttons.forEach((button, index) => {
+        if (isMobile) {
+            const isSunButton = button.classList.contains('sun-btn');
+            
+            if (isSunButton) {
+                button.style.left = centerX + 'px';
+                button.style.top = (centerY - radius * 0.3) + 'px';
+            } else {
+                const arcButtons = Array.from(buttons).filter(btn => !btn.classList.contains('sun-btn'));
+                const buttonIndex = arcButtons.indexOf(button);
+                const totalButtons = arcButtons.length;
+                const arcStart = -160;
+                const arcEnd = -20;
+                const arcSpan = arcEnd - arcStart;
+                const angleStep = arcSpan / (totalButtons - 1);
+                const angle = arcStart + (buttonIndex * angleStep);
+                const angleRad = angle * (Math.PI / 180);
+                
+                const x = centerX + radius * Math.cos(angleRad);
+                const y = centerY + radius * Math.sin(angleRad);
+                
+                button.style.left = x + 'px';
+                button.style.top = y + 'px';
+            }
+        } else {
+            const angle = parseFloat(button.getAttribute('data-angle'));
+            const offset = parseFloat(button.getAttribute('data-offset')) || 0;
+            const angleRad = (angle - 90) * (Math.PI / 180);
+            
+            const x = centerX + (radius + offset) * Math.cos(angleRad);
+            const y = centerY + (radius + offset) * Math.sin(angleRad);
+            
+            button.style.left = x + 'px';
+            button.style.top = y + 'px';
+        }
     });
 }
 
