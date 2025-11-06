@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar System Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="space-background">
+        <div class="stars-layer"></div>
+        <div class="nebula"></div>
+        <div class="scan-lines"></div>
+    </div>
+
+    <div class="hud-overlay">
+        <div class="corner-frame top-left"></div>
+        <div class="corner-frame top-right"></div>
+        <div class="corner-frame bottom-left"></div>
+        <div class="corner-frame bottom-right"></div>
+    </div>
+
+    <header class="main-header">
+        <div class="header-content">
+            <div class="planet-info-header">
+                <h1 id="planetTitle" class="glitch" data-text="EARTH">EARTH</h1>
+                <p id="planetTagline" class="subtitle-glow">Voted best planet in the Solar System by all organisms.</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="planet-display-area">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring-2"></div>
+        
+        <div class="planet-container" id="planetContainer">
+            <div class="planet-glow"></div>
+            <div class="main-planet-sphere" id="mainPlanet">
+                <div class="planet-atmosphere"></div>
+                <div class="planet-reflection"></div>
+            </div>
+            <div class="hologram-grid"></div>
+        </div>
+
+        <div class="planet-navigation" id="planetNavigation">
+            <button class="nav-planet-btn" data-planet="mercury" data-angle="0">
+                <span class="btn-icon"></span>
+                <span class="btn-text">MERCURY</span>
+            </button>
+            <button class="nav-planet-btn" data-planet="venus" data-angle="45">
+                <span class="btn-icon"></span>
+                <span class="btn-text">VENUS</span>
+            </button>
+            <button class="nav-planet-btn" data-planet="earth" data-angle="90">
+                <span class="btn-icon"></span>
+                <span class="btn-text">EARTH</span>
+            </button>
+            <button class="nav-planet-btn" data-planet="mars" data-angle="135">
+                <span class="btn-icon"></span>
+                <span class="btn-text">MARS</span>
+            </button>
+            <button class="nav-planet-btn" data-planet="jupiter" data-angle="180">
+                <span class="btn-icon"></span>
+                <span class="btn-text">JUPITER</span>
+            </button>
+            <button class="nav-planet-btn" data-planet="saturn" data-angle="225">
+                <span class="btn-icon"></span>
+                <span class="btn-text">SATURN</span>
+            </button>
+            <button class="nav-planet-btn" data-planet="uranus" data-angle="270">
+                <span class="btn-icon"></span>
+                <span class="btn-text">URANUS</span>
+            </button>
+            <button class="nav-planet-btn" data-planet="neptune" data-angle="315">
+                <span class="btn-icon"></span>
+                <span class="btn-text">NEPTUNE</span>
+            </button>
+            <button class="nav-planet-btn sun-btn" data-planet="sun" data-angle="180" data-offset="100">
+                <span class="btn-icon sun-icon"></span>
+                <span class="btn-text">SUN</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="data-panel-trigger" id="dataPanelTrigger">
+        <div class="trigger-line"></div>
+        <div class="trigger-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+        <div class="trigger-text">PLANETARY DATA</div>
+    </div>
+
+    <div class="data-panel" id="dataPanel">
+        <div class="panel-header">
+            <h2 id="panelTitle">EARTH SPECIFICATIONS</h2>
+            <button class="close-panel" id="closePanel">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <div class="panel-content">
+            <div class="stats-display">
+                <div class="stat-box">
+                    <div class="stat-icon">⟲</div>
+                    <div class="stat-data">
+                        <span class="stat-label">AXIAL TILT</span>
+                        <span class="stat-value" id="tiltValue">23.5°</span>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">⊕</div>
+                    <div class="stat-data">
+                        <span class="stat-label">GRAVITY</span>
+                        <span class="stat-value" id="gravityValue">1.0x</span>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">◷</div>
+                    <div class="stat-data">
+                        <span class="stat-label">DAY LENGTH</span>
+                        <span class="stat-value" id="hoursValue">24h</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-grid">
+                <div class="data-item">
+                    <span class="data-label">DIAMETER</span>
+                    <span class="data-value" id="diameter">12,742 km</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">MASS</span>
+                    <span class="data-value" id="mass">5.972 × 10²⁴ kg</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">DISTANCE FROM SUN</span>
+                    <span class="data-value" id="distance">149.6 million km</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">ORBITAL PERIOD</span>
+                    <span class="data-value" id="orbitalPeriod">365.25 days</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">TEMPERATURE RANGE</span>
+                    <span class="data-value" id="temperature">-88°C to 58°C</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">NATURAL SATELLITES</span>
+                    <span class="data-value" id="moons">1 (The Moon)</span>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>OVERVIEW</h3>
+                <p id="overview" class="overview-text">Earth, our home planet, is the only place we know of so far that's inhabited by living things.</p>
+            </div>
+
+            <div class="info-section">
+                <h3>DISCOVERY LOG</h3>
+                <p id="funFact" class="fun-fact-text">Earth is the only planet not named after a god or goddess.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
