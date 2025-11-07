@@ -389,7 +389,212 @@ window.addEventListener('orientationchange', () => {
     setTimeout(positionNavButtons, 100);
 });
 
+const constellationsData = {
+    capricorn: {
+        name: "Capricorn",
+        position: { top: '15%', left: '10%' },
+        stars: [
+            { x: 0, y: 0, bright: true },
+            { x: 25, y: 15 },
+            { x: 50, y: 20, bright: true },
+            { x: 75, y: 10 },
+            { x: 100, y: 0 },
+            { x: 85, y: 30 },
+            { x: 60, y: 45 },
+            { x: 35, y: 40 },
+            { x: 10, y: 25 }
+        ],
+        connections: [
+            [0, 1], [1, 2], [2, 3], [3, 4],
+            [2, 5], [5, 6], [6, 7], [7, 1]
+        ]
+    },
+    aquarius: {
+        name: "Aquarius",
+        position: { top: '20%', right: '5%' },
+        stars: [
+            { x: 0, y: 20, bright: true },
+            { x: 30, y: 0 },
+            { x: 60, y: 15, bright: true },
+            { x: 90, y: 5 },
+            { x: 70, y: 35 },
+            { x: 40, y: 45 },
+            { x: 10, y: 50 },
+            { x: 50, y: 30 }
+        ],
+        connections: [
+            [0, 1], [1, 2], [2, 3],
+            [2, 4], [4, 5], [5, 6],
+            [4, 7], [7, 5]
+        ]
+    },
+    pisces: {
+        name: "Pisces",
+        position: { top: '50%', left: '20%' },
+        stars: [
+            { x: 0, y: 0 },
+            { x: 20, y: 15, bright: true },
+            { x: 40, y: 25 },
+            { x: 60, y: 20 },
+            { x: 80, y: 5 },
+            { x: 100, y: 0 },
+            { x: 50, y: 45 },
+            { x: 30, y: 50 },
+            { x: 70, y: 50 }
+        ],
+        connections: [
+            [0, 1], [1, 2], [2, 3], [3, 4], [4, 5],
+            [2, 6], [6, 7], [6, 8]
+        ]
+    },
+    aries: {
+        name: "Aries",
+        position: { bottom: '20%', right: '15%' },
+        stars: [
+            { x: 0, y: 30 },
+            { x: 30, y: 15, bright: true },
+            { x: 60, y: 0 },
+            { x: 50, y: 35 },
+            { x: 70, y: 45 }
+        ],
+        connections: [
+            [0, 1], [1, 2], [1, 3], [3, 4]
+        ]
+    },
+    taurus: {
+        name: "Taurus",
+        position: { bottom: '15%', left: '12%' },
+        stars: [
+            { x: 0, y: 40 },
+            { x: 25, y: 25, bright: true },
+            { x: 50, y: 15 },
+            { x: 75, y: 0 },
+            { x: 100, y: 10 },
+            { x: 60, y: 35 },
+            { x: 40, y: 50 },
+            { x: 80, y: 45 }
+        ],
+        connections: [
+            [0, 1], [1, 2], [2, 3], [3, 4],
+            [2, 5], [5, 6], [5, 7]
+        ]
+    },
+    gemini: {
+        name: "Gemini",
+        position: { top: '12%', left: '75%' },
+        stars: [
+            { x: 0, y: 0, bright: true },
+            { x: 0, y: 30 },
+            { x: 0, y: 60 },
+            { x: 50, y: 0, bright: true },
+            { x: 50, y: 30 },
+            { x: 50, y: 60 },
+            { x: 25, y: 65 }
+        ],
+        connections: [
+            [0, 1], [1, 2], [3, 4], [4, 5],
+            [2, 6], [5, 6]
+        ]
+    },
+    leo: {
+        name: "Leo",
+        position: { top: '87%', right: '50%' },
+        stars: [
+            { x: 0, y: 30 },
+            { x: 30, y: 15 },
+            { x: 60, y: 0, bright: true },
+            { x: 90, y: 10 },
+            { x: 70, y: 25 },
+            { x: 50, y: 40 },
+            { x: 30, y: 50 },
+            { x: 10, y: 55 }
+        ],
+        connections: [
+            [0, 1], [1, 2], [2, 3], [2, 4],
+            [4, 5], [5, 6], [6, 7], [6, 1]
+        ]
+    },
+    virgo: {
+        name: "Virgo",
+        position: { bottom: '50%', left: '75%' },
+        stars: [
+            { x: 0, y: 20 },
+            { x: 25, y: 0, bright: true },
+            { x: 50, y: 10 },
+            { x: 75, y: 5 },
+            { x: 100, y: 20 },
+            { x: 80, y: 40 },
+            { x: 50, y: 50 },
+            { x: 20, y: 45 }
+        ],
+        connections: [
+            [0, 1], [1, 2], [2, 3], [3, 4],
+            [3, 5], [5, 6], [6, 7], [7, 0]
+        ]
+    }
+};
+
+function renderConstellations() {
+    const container = document.getElementById('constellationsLayer');
+    if (!container) return;
+
+    Object.entries(constellationsData).forEach(([key, constellation]) => {
+        const constElement = document.createElement('div');
+        constElement.className = 'constellation';
+        constElement.id = `constellation-${key}`;
+        
+        Object.entries(constellation.position).forEach(([prop, value]) => {
+            constElement.style[prop] = value;
+        });
+
+        const maxX = Math.max(...constellation.stars.map(s => s.x));
+        const maxY = Math.max(...constellation.stars.map(s => s.y));
+        
+        constElement.style.width = maxX + 20 + 'px';
+        constElement.style.height = maxY + 20 + 'px';
+
+        constellation.stars.forEach((star, index) => {
+            const starElement = document.createElement('div');
+            starElement.className = 'constellation-star' + (star.bright ? ' bright' : '');
+            starElement.style.left = star.x + 'px';
+            starElement.style.top = star.y + 'px';
+            starElement.style.animationDelay = (index * 0.3) + 's';
+            constElement.appendChild(starElement);
+        });
+
+        constellation.connections.forEach(([start, end]) => {
+            const star1 = constellation.stars[start];
+            const star2 = constellation.stars[end];
+            
+            const dx = star2.x - star1.x;
+            const dy = star2.y - star1.y;
+            const length = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+            
+            const line = document.createElement('div');
+            line.className = 'constellation-line';
+            line.style.width = length + 'px';
+            line.style.left = star1.x + 'px';
+            line.style.top = star1.y + 'px';
+            line.style.transform = `rotate(${angle}deg)`;
+            
+            constElement.appendChild(line);
+        });
+
+        const label = document.createElement('div');
+        label.className = 'constellation-label';
+        label.textContent = constellation.name;
+        label.style.left = (maxX / 2) + 'px';
+        label.style.top = (maxY + 15) + 'px';
+        label.style.transform = 'translateX(-50%)';
+        constElement.appendChild(label);
+
+        container.appendChild(constElement);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     updatePlanetDisplay('earth');
     positionNavButtons();
+    renderConstellations();
 });
