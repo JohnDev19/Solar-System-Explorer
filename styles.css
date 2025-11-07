@@ -532,6 +532,52 @@ body {
     margin: 0 auto;
 }
 
+.view-toggle-container {
+    display: none;
+    gap: 0;
+    background: rgba(0, 8, 20, 0.5);
+    border: 1px solid var(--border-glow);
+    border-radius: 8px;
+    padding: 4px;
+    backdrop-filter: blur(10px);
+}
+
+.view-toggle-btn {
+    font-family: 'Orbitron', sans-serif;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 10px 20px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.view-toggle-btn .toggle-icon {
+    font-size: 1rem;
+}
+
+.view-toggle-btn .toggle-text {
+    display: inline-block;
+}
+
+.view-toggle-btn:hover {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 243, 255, 0.1);
+}
+
+.view-toggle-btn.active {
+    background: linear-gradient(135deg, rgba(0, 243, 255, 0.3), rgba(179, 0, 255, 0.3));
+    color: var(--primary-glow);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+}
+
 .planet-display-area {
     width: 100vw;
     height: 100vh;
@@ -1156,7 +1202,205 @@ body {
     box-shadow: 0 0 10px var(--primary-glow);
 }
 
+.solar-system-simulation {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.solar-system-simulation.active {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+.planet-display-area {
+    transition: opacity 0.5s ease;
+}
+
+.planet-display-area.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sun-center {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    z-index: 100;
+}
+
+.sun-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(255, 170, 0, 0.8),
+                0 0 80px rgba(255, 170, 0, 0.5),
+                0 0 120px rgba(255, 170, 0, 0.3);
+    animation: sunPulse 4s ease-in-out infinite;
+}
+
+.sun-glow {
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 170, 0, 0.4) 0%, transparent 70%);
+    filter: blur(30px);
+    animation: sunGlowPulse 4s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes sunGlowPulse {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.orbit {
+    position: absolute;
+    border: 1px solid rgba(0, 243, 255, 0.15);
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.mercury-orbit {
+    width: 140px;
+    height: 140px;
+}
+
+.venus-orbit {
+    width: 190px;
+    height: 190px;
+}
+
+.earth-orbit {
+    width: 240px;
+    height: 240px;
+}
+
+.mars-orbit {
+    width: 300px;
+    height: 300px;
+}
+
+.jupiter-orbit {
+    width: 420px;
+    height: 420px;
+}
+
+.saturn-orbit {
+    width: 540px;
+    height: 540px;
+}
+
+.uranus-orbit {
+    width: 660px;
+    height: 660px;
+}
+
+.neptune-orbit {
+    width: 780px;
+    height: 780px;
+}
+
+.planet-orbit-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: orbitRotate var(--orbit-duration) linear infinite;
+}
+
+@keyframes orbitRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.orbit-planet {
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+    transform: translateX(-50%);
+}
+
+.mercury-planet {
+    width: 12px;
+    height: 12px;
+    top: 0;
+    left: 50%;
+}
+
+.venus-planet {
+    width: 18px;
+    height: 18px;
+    top: 0;
+    left: 50%;
+}
+
+.earth-planet {
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 50%;
+}
+
+.mars-planet {
+    width: 16px;
+    height: 16px;
+    top: 0;
+    left: 50%;
+}
+
+.jupiter-planet {
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 50%;
+}
+
+.saturn-planet {
+    width: 36px;
+    height: 36px;
+    top: 0;
+    left: 50%;
+}
+
+.uranus-planet {
+    width: 28px;
+    height: 28px;
+    top: 0;
+    left: 50%;
+}
+
+.neptune-planet {
+    width: 26px;
+    height: 26px;
+    top: 0;
+    left: 50%;
+}
+
 @media (min-width: 1025px) and (max-width: 1919px) {
+    .view-toggle-container {
+        display: flex;
+    }
+
     .planet-container {
         width: 380px;
         height: 380px;
@@ -1254,6 +1498,10 @@ body {
 }
 
 @media (min-width: 1920px) {
+    .view-toggle-container {
+        display: flex;
+    }
+
     .planet-container {
         width: 420px;
         height: 420px;
@@ -1683,6 +1931,10 @@ body {
 
 /* 2K Monitors and Larger Displays (2560px+) */
 @media (min-width: 2560px) {
+    .view-toggle-container {
+        display: flex;
+    }
+
     .planet-container {
         width: 520px;
         height: 520px;
@@ -1711,6 +1963,20 @@ body {
     .main-header {
         padding: 40px 100px 30px;
     }
+
+    .sun-center {
+        width: 100px;
+        height: 100px;
+    }
+
+    .mercury-orbit { width: 180px; height: 180px; }
+    .venus-orbit { width: 240px; height: 240px; }
+    .earth-orbit { width: 300px; height: 300px; }
+    .mars-orbit { width: 380px; height: 380px; }
+    .jupiter-orbit { width: 540px; height: 540px; }
+    .saturn-orbit { width: 680px; height: 680px; }
+    .uranus-orbit { width: 840px; height: 840px; }
+    .neptune-orbit { width: 1000px; height: 1000px; }
     
     .planet-info-header h1 {
         font-size: 2.5rem;
@@ -1732,6 +1998,10 @@ body {
 
 /* 4K Monitors and Ultra-Wide Displays (3840px+) */
 @media (min-width: 3840px) {
+    .view-toggle-container {
+        display: flex;
+    }
+
     .planet-container {
         width: 650px;
         height: 650px;
@@ -1760,6 +2030,20 @@ body {
     .main-header {
         padding: 50px 120px 35px;
     }
+
+    .sun-center {
+        width: 130px;
+        height: 130px;
+    }
+
+    .mercury-orbit { width: 220px; height: 220px; }
+    .venus-orbit { width: 300px; height: 300px; }
+    .earth-orbit { width: 380px; height: 380px; }
+    .mars-orbit { width: 480px; height: 480px; }
+    .jupiter-orbit { width: 680px; height: 680px; }
+    .saturn-orbit { width: 860px; height: 860px; }
+    .uranus-orbit { width: 1060px; height: 1060px; }
+    .neptune-orbit { width: 1260px; height: 1260px; }
     
     .planet-info-header h1 {
         font-size: 3rem;
@@ -1785,6 +2069,10 @@ body {
 
 /* 5K+ and Ultra-Wide Displays (5120px+) */
 @media (min-width: 5120px) {
+    .view-toggle-container {
+        display: flex;
+    }
+
     .planet-container {
         width: 800px;
         height: 800px;
@@ -1813,6 +2101,20 @@ body {
     .main-header {
         padding: 60px 150px 40px;
     }
+
+    .sun-center {
+        width: 160px;
+        height: 160px;
+    }
+
+    .mercury-orbit { width: 280px; height: 280px; }
+    .venus-orbit { width: 380px; height: 380px; }
+    .earth-orbit { width: 480px; height: 480px; }
+    .mars-orbit { width: 600px; height: 600px; }
+    .jupiter-orbit { width: 840px; height: 840px; }
+    .saturn-orbit { width: 1080px; height: 1080px; }
+    .uranus-orbit { width: 1320px; height: 1320px; }
+    .neptune-orbit { width: 1560px; height: 1560px; }
     
     .planet-info-header h1 {
         font-size: 3.5rem;
