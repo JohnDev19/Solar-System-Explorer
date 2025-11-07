@@ -37,6 +37,16 @@
                 <h1 id="planetTitle" class="glitch" data-text="EARTH">EARTH</h1>
                 <p id="planetTagline" class="subtitle-glow">Voted best planet in the Solar System by all organisms.</p>
             </div>
+            <div class="view-toggle-container" id="viewToggleContainer">
+                <button class="view-toggle-btn active" data-view="explorer" id="explorerBtn">
+                    <span class="toggle-icon">🔭</span>
+                    <span class="toggle-text">EXPLORER</span>
+                </button>
+                <button class="view-toggle-btn" data-view="simulation" id="simulationBtn">
+                    <span class="toggle-icon">🌌</span>
+                    <span class="toggle-text">SIMULATION</span>
+                </button>
+            </div>
             <div class="orbital-info">
                 <div class="orbital-label">ORBITAL PERIOD</div>
                 <div class="orbital-value" id="orbitalValue">365.25 days</div>
@@ -97,6 +107,53 @@
                     <span class="btn-icon sun-icon"></span>
                     <span class="btn-text">SUN</span>
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="solar-system-simulation" id="solarSystemSimulation">
+        <div class="sun-center">
+            <div class="sun-glow"></div>
+            <img src="images/sun.png" alt="Sun" class="sun-image">
+        </div>
+        <div class="orbit mercury-orbit">
+            <div class="planet-orbit-wrapper" style="--orbit-duration: 88s;">
+                <img src="images/mercury.png" alt="Mercury" class="orbit-planet mercury-planet">
+            </div>
+        </div>
+        <div class="orbit venus-orbit">
+            <div class="planet-orbit-wrapper" style="--orbit-duration: 225s;">
+                <img src="images/venus.png" alt="Venus" class="orbit-planet venus-planet">
+            </div>
+        </div>
+        <div class="orbit earth-orbit">
+            <div class="planet-orbit-wrapper" style="--orbit-duration: 365s;">
+                <img src="images/earth.png" alt="Earth" class="orbit-planet earth-planet">
+            </div>
+        </div>
+        <div class="orbit mars-orbit">
+            <div class="planet-orbit-wrapper" style="--orbit-duration: 687s;">
+                <img src="images/mars.png" alt="Mars" class="orbit-planet mars-planet">
+            </div>
+        </div>
+        <div class="orbit jupiter-orbit">
+            <div class="planet-orbit-wrapper" style="--orbit-duration: 4333s;">
+                <img src="images/jupiter.png" alt="Jupiter" class="orbit-planet jupiter-planet">
+            </div>
+        </div>
+        <div class="orbit saturn-orbit">
+            <div class="planet-orbit-wrapper" style="--orbit-duration: 10759s;">
+                <img src="images/saturn.png" alt="Saturn" class="orbit-planet saturn-planet">
+            </div>
+        </div>
+        <div class="orbit uranus-orbit">
+            <div class="planet-orbit-wrapper" style="--orbit-duration: 30687s;">
+                <img src="images/uranus.png" alt="Uranus" class="orbit-planet uranus-planet">
+            </div>
+        </div>
+        <div class="orbit neptune-orbit">
+            <div class="planet-orbit-wrapper" style="--orbit-duration: 60190s;">
+                <img src="images/neptune.png" alt="Neptune" class="orbit-planet neptune-planet">
             </div>
         </div>
     </div>
