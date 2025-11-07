@@ -491,6 +491,7 @@ body {
     padding: 30px 40px;
     z-index: 10;
     background: linear-gradient(180deg, rgba(0, 8, 20, 0.6) 0%, transparent 100%);
+    transition: opacity 0.5s ease;
 }
 
 .header-content {
@@ -532,14 +533,28 @@ body {
     margin: 0 auto;
 }
 
+.right-controls {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-end;
+}
+
 .view-toggle-container {
-    display: none;
+    display: flex;
+    flex-direction: column;
     gap: 0;
-    background: rgba(0, 8, 20, 0.5);
+    background: rgba(0, 8, 20, 0.8);
     border: 1px solid var(--border-glow);
     border-radius: 8px;
     padding: 4px;
     backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
 }
 
 .view-toggle-btn {
@@ -547,7 +562,7 @@ body {
     background: transparent;
     border: none;
     color: rgba(255, 255, 255, 0.6);
-    padding: 10px 20px;
+    padding: 12px;
     font-size: 0.75rem;
     letter-spacing: 2px;
     cursor: pointer;
@@ -555,16 +570,19 @@ body {
     border-radius: 6px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     white-space: nowrap;
+    width: 50px;
+    height: 50px;
 }
 
 .view-toggle-btn .toggle-icon {
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 .view-toggle-btn .toggle-text {
-    display: inline-block;
+    display: none;
 }
 
 .view-toggle-btn:hover {
@@ -576,6 +594,48 @@ body {
     background: linear-gradient(135deg, rgba(0, 243, 255, 0.3), rgba(179, 0, 255, 0.3));
     color: var(--primary-glow);
     box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+}
+
+.music-control {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    background: rgba(0, 8, 20, 0.8);
+    border: 1px solid var(--border-glow);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+    padding: 0;
+}
+
+.music-control:hover {
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.music-control:active {
+    transform: scale(0.95);
+}
+
+.music-icon {
+    font-size: 18px;
+    color: var(--primary-glow);
+    transition: opacity 0.3s ease;
+}
+
+.music-icon.hidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .right-controls {
+        display: none;
+    }
 }
 
 .planet-display-area {
