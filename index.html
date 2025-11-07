@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solar System Explorer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -37,22 +38,34 @@
                 <h1 id="planetTitle" class="glitch" data-text="EARTH">EARTH</h1>
                 <p id="planetTagline" class="subtitle-glow">Voted best planet in the Solar System by all organisms.</p>
             </div>
-            <div class="view-toggle-container" id="viewToggleContainer">
-                <button class="view-toggle-btn active" data-view="explorer" id="explorerBtn">
-                    <span class="toggle-icon">🔭</span>
-                    <span class="toggle-text">EXPLORER</span>
-                </button>
-                <button class="view-toggle-btn" data-view="simulation" id="simulationBtn">
-                    <span class="toggle-icon">🌌</span>
-                    <span class="toggle-text">SIMULATION</span>
-                </button>
-            </div>
             <div class="orbital-info">
                 <div class="orbital-label">ORBITAL PERIOD</div>
                 <div class="orbital-value" id="orbitalValue">365.25 days</div>
             </div>
         </div>
     </header>
+
+    <div class="right-controls">
+        <div class="view-toggle-container" id="viewToggleContainer">
+            <button class="view-toggle-btn active" data-view="explorer" id="explorerBtn">
+                <i class="fas fa-rocket toggle-icon"></i>
+                <span class="toggle-text">EXPLORER</span>
+            </button>
+            <button class="view-toggle-btn" data-view="simulation" id="simulationBtn">
+                <i class="fas fa-globe toggle-icon"></i>
+                <span class="toggle-text">SIMULATION</span>
+            </button>
+        </div>
+        
+        <button class="music-control" id="musicControl">
+            <i class="fas fa-play music-icon play-icon"></i>
+            <i class="fas fa-pause music-icon pause-icon hidden"></i>
+        </button>
+        
+        <audio id="backgroundMusic" loop autoplay muted>
+            <source src="floating-in-space-danijel-zambo-41609-03-12.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 
     <div class="planet-display-area">
         <div class="orbit-ring"></div>
