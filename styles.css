@@ -515,19 +515,10 @@ body {
 
 @keyframes planetCircle {
     0% { 
-        transform: translate(0, 0) rotate(0deg);
-    }
-    25% { 
-        transform: translate(30px, -30px) rotate(90deg);
-    }
-    50% { 
-        transform: translate(0, -60px) rotate(180deg);
-    }
-    75% { 
-        transform: translate(-30px, -30px) rotate(270deg);
+        transform: rotate(0deg);
     }
     100% { 
-        transform: translate(0, 0) rotate(360deg);
+        transform: rotate(360deg);
     }
 }
 
@@ -607,7 +598,7 @@ body {
 
 .saturn-ring {
     position: absolute;
-    width: 200%;
+    width: 170%;
     height: 80%;
     top: 50%;
     left: 50%;
@@ -616,7 +607,14 @@ body {
     opacity: 0;
     transition: opacity 0.5s ease;
     z-index: 0;
-    clip-path: ellipse(50% 50% at 50% 0%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 0%, black 0%, black 100%, transparent 100%);
+    mask-image: radial-gradient(ellipse at 50% 0%, black 0%, black 100%, transparent 100%);
+    -webkit-mask-size: 100% 54%;
+    mask-size: 100% 54%;
+    -webkit-mask-position: 50% 0%;
+    mask-position: 50% 0%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
 }
 
 .saturn-ring.visible {
@@ -633,24 +631,28 @@ body {
         radial-gradient(
             ellipse at center,
             transparent 0%,
-            transparent 46%,
-            rgba(180, 150, 100, 0.1) 47%,
-            rgba(200, 170, 110, 0.25) 48%,
-            rgba(228, 188, 130, 0.5) 49%,
-            rgba(244, 212, 124, 0.75) 50%,
-            rgba(255, 230, 160, 0.85) 51%,
-            rgba(255, 240, 180, 0.9) 51.5%,
-            rgba(255, 230, 160, 0.85) 52%,
-            rgba(244, 212, 124, 0.75) 53%,
-            rgba(228, 188, 130, 0.5) 54%,
-            rgba(200, 170, 110, 0.25) 55%,
-            rgba(180, 150, 100, 0.1) 56%,
-            transparent 57%,
+            transparent 42%,
+            rgba(180, 150, 100, 0.15) 43%,
+            rgba(200, 170, 110, 0.3) 44%,
+            rgba(220, 180, 120, 0.5) 45%,
+            rgba(228, 188, 130, 0.65) 46.5%,
+            rgba(240, 200, 135, 0.8) 48%,
+            rgba(244, 212, 124, 0.85) 49%,
+            rgba(255, 230, 160, 0.95) 50%,
+            rgba(255, 240, 180, 1) 51%,
+            rgba(255, 230, 160, 0.95) 52%,
+            rgba(244, 212, 124, 0.85) 53%,
+            rgba(240, 200, 135, 0.8) 54%,
+            rgba(228, 188, 130, 0.65) 55.5%,
+            rgba(220, 180, 120, 0.5) 57%,
+            rgba(200, 170, 110, 0.3) 58%,
+            rgba(180, 150, 100, 0.15) 59%,
+            transparent 60%,
             transparent 100%
         );
     box-shadow: 
-        inset 0 0 40px rgba(244, 212, 124, 0.4),
-        0 8px 25px rgba(244, 212, 124, 0.3);
+        inset 0 0 50px rgba(244, 212, 124, 0.5),
+        0 10px 30px rgba(244, 212, 124, 0.4);
 }
 
 .saturn-ring::after {
@@ -665,18 +667,20 @@ body {
         radial-gradient(
             ellipse at center,
             transparent 0%,
-            transparent 47.5%,
-            rgba(244, 212, 124, 0.3) 50%,
-            rgba(255, 230, 160, 0.4) 51.5%,
-            rgba(244, 212, 124, 0.3) 53%,
-            transparent 54.5%,
+            transparent 46%,
+            rgba(200, 170, 110, 0.2) 47%,
+            rgba(244, 212, 124, 0.4) 49%,
+            rgba(255, 230, 160, 0.5) 51%,
+            rgba(244, 212, 124, 0.4) 53%,
+            rgba(200, 170, 110, 0.2) 55%,
+            transparent 56%,
             transparent 100%
         );
 }
 
 .saturn-ring-front {
     position: absolute;
-    width: 200%;
+    width: 170%;
     height: 80%;
     top: 50%;
     left: 50%;
@@ -685,7 +689,14 @@ body {
     opacity: 0;
     transition: opacity 0.5s ease;
     z-index: 5;
-    clip-path: ellipse(50% 50% at 50% 100%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 100%, black 0%, black 100%, transparent 100%);
+    mask-image: radial-gradient(ellipse at 50% 100%, black 0%, black 100%, transparent 100%);
+    -webkit-mask-size: 100% 54%;
+    mask-size: 100% 54%;
+    -webkit-mask-position: 50% 100%;
+    mask-position: 50% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
 }
 
 .saturn-ring-front.visible {
@@ -702,24 +713,28 @@ body {
         radial-gradient(
             ellipse at center,
             transparent 0%,
-            transparent 46%,
-            rgba(180, 150, 100, 0.1) 47%,
-            rgba(200, 170, 110, 0.25) 48%,
-            rgba(228, 188, 130, 0.5) 49%,
-            rgba(244, 212, 124, 0.75) 50%,
-            rgba(255, 230, 160, 0.85) 51%,
-            rgba(255, 240, 180, 0.9) 51.5%,
-            rgba(255, 230, 160, 0.85) 52%,
-            rgba(244, 212, 124, 0.75) 53%,
-            rgba(228, 188, 130, 0.5) 54%,
-            rgba(200, 170, 110, 0.25) 55%,
-            rgba(180, 150, 100, 0.1) 56%,
-            transparent 57%,
+            transparent 42%,
+            rgba(180, 150, 100, 0.15) 43%,
+            rgba(200, 170, 110, 0.3) 44%,
+            rgba(220, 180, 120, 0.5) 45%,
+            rgba(228, 188, 130, 0.65) 46.5%,
+            rgba(240, 200, 135, 0.8) 48%,
+            rgba(244, 212, 124, 0.85) 49%,
+            rgba(255, 230, 160, 0.95) 50%,
+            rgba(255, 240, 180, 1) 51%,
+            rgba(255, 230, 160, 0.95) 52%,
+            rgba(244, 212, 124, 0.85) 53%,
+            rgba(240, 200, 135, 0.8) 54%,
+            rgba(228, 188, 130, 0.65) 55.5%,
+            rgba(220, 180, 120, 0.5) 57%,
+            rgba(200, 170, 110, 0.3) 58%,
+            rgba(180, 150, 100, 0.15) 59%,
+            transparent 60%,
             transparent 100%
         );
     box-shadow: 
-        inset 0 0 40px rgba(244, 212, 124, 0.4),
-        0 -8px 25px rgba(244, 212, 124, 0.3);
+        inset 0 0 50px rgba(244, 212, 124, 0.5),
+        0 -10px 30px rgba(244, 212, 124, 0.4);
 }
 
 .saturn-ring-front::after {
@@ -734,11 +749,13 @@ body {
         radial-gradient(
             ellipse at center,
             transparent 0%,
-            transparent 47.5%,
-            rgba(244, 212, 124, 0.3) 50%,
-            rgba(255, 230, 160, 0.4) 51.5%,
-            rgba(244, 212, 124, 0.3) 53%,
-            transparent 54.5%,
+            transparent 46%,
+            rgba(200, 170, 110, 0.2) 47%,
+            rgba(244, 212, 124, 0.4) 49%,
+            rgba(255, 230, 160, 0.5) 51%,
+            rgba(244, 212, 124, 0.4) 53%,
+            rgba(200, 170, 110, 0.2) 55%,
+            transparent 56%,
             transparent 100%
         );
 }
@@ -755,6 +772,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 15;
 }
 
 .nav-planet-btn {
@@ -1396,27 +1414,9 @@ body {
         transform: translate(-50%, 50%);
         width: clamp(280px, 70vw, 450px);
         height: clamp(280px, 70vw, 450px);
-        animation: planetCircleMobile 120s linear infinite;
+        animation: none;
         transition: opacity 0.4s ease;
         overflow: visible;
-    }
-
-    @keyframes planetCircleMobile {
-        0% { 
-            transform: translate(-50%, 50%) rotate(0deg);
-        }
-        25% { 
-            transform: translate(calc(-50% + 15px), calc(50% - 15px)) rotate(90deg);
-        }
-        50% { 
-            transform: translate(-50%, calc(50% - 30px)) rotate(180deg);
-        }
-        75% { 
-            transform: translate(calc(-50% - 15px), calc(50% - 15px)) rotate(270deg);
-        }
-        100% { 
-            transform: translate(-50%, 50%) rotate(360deg);
-        }
     }
 
     .main-planet-sphere {
