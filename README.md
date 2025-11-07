@@ -116,11 +116,9 @@ This project is licensed under the MIT License - see the LICENSE [LICENSE](LICEN
 
 - Add dwarf planets (Pluto, Ceres, Eris)
 - Include asteroid belt visualization
-- Add sound effects and background music
 - Implement 3D planet models
 - Add planetary moon information
 - Include scale comparison tool
-- Add orbital path animations
 
 ---
 
