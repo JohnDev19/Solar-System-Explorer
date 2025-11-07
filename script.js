@@ -231,6 +231,17 @@ function updatePlanetDisplay(planetKey) {
     const currentIndex = planetOrder.indexOf(currentPlanet);
     const newIndex = planetOrder.indexOf(planetKey);
 
+    const saturnRingBack = document.getElementById('saturnRingBack');
+    const saturnRingFront = document.getElementById('saturnRingFront');
+    
+    if (planetKey === 'saturn') {
+        if (saturnRingBack) saturnRingBack.classList.add('visible');
+        if (saturnRingFront) saturnRingFront.classList.add('visible');
+    } else {
+        if (saturnRingBack) saturnRingBack.classList.remove('visible');
+        if (saturnRingFront) saturnRingFront.classList.remove('visible');
+    }
+
     if (mainPlanet) {
         if (isMobile && currentPlanet !== planetKey) {
             const direction = newIndex > currentIndex ? 'left' : 'right';
