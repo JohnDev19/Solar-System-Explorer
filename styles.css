@@ -367,6 +367,76 @@ body {
     animation: shootingStar8 48s linear infinite;
 }
 
+.constellations-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.constellation {
+    position: absolute;
+    pointer-events: none;
+}
+
+.constellation-star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.8),
+                0 0 8px rgba(200, 220, 255, 0.5);
+    animation: starTwinkle 3s ease-in-out infinite;
+}
+
+.constellation-star.bright {
+    width: 4px;
+    height: 4px;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 1),
+                0 0 12px rgba(200, 220, 255, 0.7);
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+.constellation-line {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(200, 220, 255, 0.3) 10%,
+        rgba(200, 220, 255, 0.3) 90%,
+        transparent 100%);
+    transform-origin: left center;
+    opacity: 0.4;
+}
+
+.constellation-label {
+    position: absolute;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    white-space: nowrap;
+    animation: labelGlow 4s ease-in-out infinite;
+}
+
+@keyframes labelGlow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.7; }
+}
+
+@media (max-width: 768px) {
+    .constellation {
+        display: none;
+    }
+}
+
 .hud-overlay {
     position: fixed;
     top: 0;
