@@ -7,6 +7,9 @@ Explore the planets of our Solar System with visuals and information. Built with
 ![Solar System Explorer](images/screenshot3.jpg)
 ![Solar System Explorer](images/screenshot4.jpg)
 
+## Solar System Simulator
+![Solar System simulator](images/screenshot5.jpg)
+
 ## ✨ Features
 
 - **Planet Navigation**: Click on any planet button to view information
