@@ -1680,3 +1680,163 @@ body {
         height: 100vw !important;
     }
 }
+
+/* 2K Monitors and Larger Displays (2560px+) */
+@media (min-width: 2560px) {
+    .planet-container {
+        width: 520px;
+        height: 520px;
+        animation: none;
+    }
+
+    .orbit-ring {
+        width: 780px;
+        height: 780px;
+        left: 50%;
+        top: 50%;
+    }
+
+    .orbit-ring-2 {
+        width: 830px;
+        height: 830px;
+        left: 50%;
+        top: 50%;
+    }
+    
+    .planet-navigation {
+        width: 780px;
+        height: 780px;
+    }
+
+    .main-header {
+        padding: 40px 100px 30px;
+    }
+    
+    .planet-info-header h1 {
+        font-size: 2.5rem;
+        letter-spacing: 6px;
+    }
+    
+    .subtitle-glow {
+        font-size: 1rem;
+    }
+    
+    .orbital-label {
+        font-size: 0.8rem;
+    }
+    
+    .orbital-value {
+        font-size: 1rem;
+    }
+}
+
+/* 4K Monitors and Ultra-Wide Displays (3840px+) */
+@media (min-width: 3840px) {
+    .planet-container {
+        width: 650px;
+        height: 650px;
+        animation: none;
+    }
+
+    .orbit-ring {
+        width: 980px;
+        height: 980px;
+        left: 50%;
+        top: 50%;
+    }
+
+    .orbit-ring-2 {
+        width: 1030px;
+        height: 1030px;
+        left: 50%;
+        top: 50%;
+    }
+    
+    .planet-navigation {
+        width: 980px;
+        height: 980px;
+    }
+
+    .main-header {
+        padding: 50px 120px 35px;
+    }
+    
+    .planet-info-header h1 {
+        font-size: 3rem;
+        letter-spacing: 8px;
+    }
+    
+    .subtitle-glow {
+        font-size: 1.2rem;
+    }
+    
+    .orbital-label {
+        font-size: 1rem;
+    }
+    
+    .orbital-value {
+        font-size: 1.2rem;
+    }
+
+    .panel-content {
+        padding: 50px 80px 80px;
+    }
+}
+
+/* 5K+ and Ultra-Wide Displays (5120px+) */
+@media (min-width: 5120px) {
+    .planet-container {
+        width: 800px;
+        height: 800px;
+        animation: none;
+    }
+
+    .orbit-ring {
+        width: 1200px;
+        height: 1200px;
+        left: 50%;
+        top: 50%;
+    }
+
+    .orbit-ring-2 {
+        width: 1250px;
+        height: 1250px;
+        left: 50%;
+        top: 50%;
+    }
+    
+    .planet-navigation {
+        width: 1200px;
+        height: 1200px;
+    }
+
+    .main-header {
+        padding: 60px 150px 40px;
+    }
+    
+    .planet-info-header h1 {
+        font-size: 3.5rem;
+        letter-spacing: 10px;
+    }
+    
+    .subtitle-glow {
+        font-size: 1.4rem;
+    }
+    
+    .orbital-label {
+        font-size: 1.2rem;
+    }
+    
+    .orbital-value {
+        font-size: 1.4rem;
+    }
+
+    .panel-content {
+        padding: 60px 100px 100px;
+    }
+    
+    .nav-planet-btn {
+        padding: 16px 32px;
+        font-size: 1.1rem;
+    }
+}
