@@ -607,12 +607,18 @@ function switchView(view) {
     const constellationsLayer = document.getElementById('constellationsLayer');
     const dataPanelTrigger = document.getElementById('dataPanelTrigger');
     const dataPanel = document.getElementById('dataPanel');
+    const mainHeader = document.querySelector('.main-header');
     
     if (view === 'simulation') {
         explorerBtn.classList.remove('active');
         simulationBtn.classList.add('active');
         
         planetDisplayArea.classList.add('hidden');
+        
+        if (mainHeader) {
+            mainHeader.style.opacity = '0';
+            mainHeader.style.pointerEvents = 'none';
+        }
         
         if (constellationsLayer) {
             constellationsLayer.style.display = 'none';
@@ -636,6 +642,11 @@ function switchView(view) {
         explorerBtn.classList.add('active');
         
         solarSystemSimulation.classList.remove('active');
+        
+        if (mainHeader) {
+            mainHeader.style.opacity = '1';
+            mainHeader.style.pointerEvents = 'auto';
+        }
         
         if (constellationsLayer) {
             constellationsLayer.style.display = 'block';
@@ -665,5 +676,43 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (simulationBtn) {
         simulationBtn.addEventListener('click', () => switchView('simulation'));
+    }
+    
+    const musicControl = document.getElementById('musicControl');
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    const playIcon = document.querySelector('.play-icon');
+    const pauseIcon = document.querySelector('.pause-icon');
+    
+    if (musicControl && backgroundMusic) {
+        backgroundMusic.muted = false;
+        backgroundMusic.play().then(() => {
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+        }).catch(err => {
+            console.log('Auto-play requires user interaction on some browsers');
+            backgroundMusic.muted = true;
+            backgroundMusic.play().then(() => {
+                setTimeout(() => {
+                    backgroundMusic.muted = false;
+                }, 100);
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+            });
+        });
+        
+        musicControl.addEventListener('click', () => {
+            if (backgroundMusic.paused) {
+                backgroundMusic.muted = false;
+                backgroundMusic.play().catch(err => {
+                    console.log('Audio playback failed:', err);
+                });
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+            } else {
+                backgroundMusic.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+            }
+        });
     }
 });
