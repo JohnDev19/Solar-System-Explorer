@@ -2,10 +2,10 @@
 
 Explore the planets of our Solar System with visuals and information. Built with pure HTML, CSS, and JavaScript.
 
-![Solar System Explorer](images/screenshot1.png)
-![Solar System Explorer](images/screenshot2.png)
-![Solar System Explorer](images/screenshot3.png)
-![Solar System Explorer](images/screenshot4.png)
+![Solar System Explorer](images/screenshot1.jpg)
+![Solar System Explorer](images/screenshot2.jpg)
+![Solar System Explorer](images/screenshot3.jpg)
+![Solar System Explorer](images/screenshot4.jpg)
 
 ## ✨ Features
 
