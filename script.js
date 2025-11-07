@@ -593,8 +593,77 @@ function renderConstellations() {
     });
 }
 
+let currentView = 'explorer';
+
+function switchView(view) {
+    if (currentView === view) return;
+    
+    currentView = view;
+    
+    const explorerBtn = document.getElementById('explorerBtn');
+    const simulationBtn = document.getElementById('simulationBtn');
+    const planetDisplayArea = document.querySelector('.planet-display-area');
+    const solarSystemSimulation = document.getElementById('solarSystemSimulation');
+    const constellationsLayer = document.getElementById('constellationsLayer');
+    const dataPanelTrigger = document.getElementById('dataPanelTrigger');
+    const dataPanel = document.getElementById('dataPanel');
+    
+    if (view === 'simulation') {
+        explorerBtn.classList.remove('active');
+        simulationBtn.classList.add('active');
+        
+        planetDisplayArea.classList.add('hidden');
+        
+        if (constellationsLayer) {
+            constellationsLayer.style.display = 'none';
+        }
+        
+        if (dataPanelTrigger) {
+            dataPanelTrigger.style.display = 'none';
+        }
+        if (dataPanel) {
+            dataPanel.classList.remove('active');
+        }
+        if (dataPanelTrigger) {
+            dataPanelTrigger.classList.remove('active');
+        }
+        
+        setTimeout(() => {
+            solarSystemSimulation.classList.add('active');
+        }, 500);
+    } else {
+        simulationBtn.classList.remove('active');
+        explorerBtn.classList.add('active');
+        
+        solarSystemSimulation.classList.remove('active');
+        
+        if (constellationsLayer) {
+            constellationsLayer.style.display = 'block';
+        }
+        
+        if (dataPanelTrigger) {
+            dataPanelTrigger.style.display = 'flex';
+        }
+        
+        setTimeout(() => {
+            planetDisplayArea.classList.remove('hidden');
+        }, 500);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     updatePlanetDisplay('earth');
     positionNavButtons();
     renderConstellations();
+    
+    const explorerBtn = document.getElementById('explorerBtn');
+    const simulationBtn = document.getElementById('simulationBtn');
+    
+    if (explorerBtn) {
+        explorerBtn.addEventListener('click', () => switchView('explorer'));
+    }
+    
+    if (simulationBtn) {
+        simulationBtn.addEventListener('click', () => switchView('simulation'));
+    }
 });
